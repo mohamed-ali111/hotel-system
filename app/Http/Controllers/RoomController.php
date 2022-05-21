@@ -8,6 +8,14 @@ use App\Model\RoomType0;
 
 class RoomController extends Controller
 {
+
+    public function index()
+{
+    $rooms = Room::all();
+    return view('backroom.index',compact('rooms'));
+}
+
+
  // public function create(){
     //     return view('backbooking.create');
     // }

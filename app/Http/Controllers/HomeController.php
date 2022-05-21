@@ -42,9 +42,9 @@ class HomeController extends Controller
        $staff_types =DB::table('staff_types')->get(['id','name','staff_type']);
          
         // $staff_types =Staff_type::all();
-        $staffs=DB::table('staffs')
-                    ->leftJoin('staff_types','staff_types.id','=','staffs.staff_type_id')
-                    ->select('staffs.id','employ_name','shift_id','id_card_no','staff_type_id','id_card_typeid',
+        $staffs=DB::table('staff1s')
+                    ->leftJoin('staff_types','staff_types.id','=','staff1s.staff_type_id')
+                    ->select('staff1s.id','employ_name','shift_id','id_card_no','staff_type_id','id_card_typeid',
                     'address' ,'contact_no','salary','name','staff_type')->get();
 
         $shifts =DB::table('shifts')->select('id','shift','shift_timing')->get();

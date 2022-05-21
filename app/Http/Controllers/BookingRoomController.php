@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class BookingRoomController extends Controller
 {
+    public function index(){
+        $bookings = BookingRoom::all();
+        $actors =DB::table('booking_rooms')->where('payment_status','=','1')->get();
+        return view('backbooking.index' , compact('bookings','actors'));
+    }
     // public function create(){
     //     return view('backbooking.create');
     // }
@@ -40,6 +45,8 @@ class BookingRoomController extends Controller
             'payment_status' => 'required|max:255|min:1',
             'customer_id' => 'required',
             'room_id' => 'required',
+            
+            'room_type' => 'required',
 
     
         ]);
@@ -52,7 +59,8 @@ class BookingRoomController extends Controller
             'remaining_price' => $request->remaining_price,
             'payment_status' => $request->payment_status,
             'customer_id' => $request->customer_id,
-            'room_id' => $request->room_id
+            'room_id' => $request->room_id,
+            'room_type' => $request->room_type
 
         ]);
         return redirect()->route('home')->with('info','room type has been updated');
@@ -93,5 +101,9 @@ class BookingRoomController extends Controller
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                         //    for testing status 
-
+                        public function getproducts( $id){
+                            $rooms = DB::table('rooms')->where('roomtype_id',$id)->pluck('room_no','id');//section_id = id =>that is come from rote when you pres on it and pluck product_name with id 
+                            return json_encode($rooms);
+                        }
+                    
 }

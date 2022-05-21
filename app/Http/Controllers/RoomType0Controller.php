@@ -12,6 +12,14 @@ class RoomType0Controller extends Controller
 //  public function create(){
 //      return view('backroomtype.create');
 //  }
+
+public function index()
+{
+    $room_types =RoomType0::all();
+    return view('backroomtype.roomtype',compact('room_types'));
+}
+
+
  public function create(){
 
     $typeofrooms = RoomType0::all();

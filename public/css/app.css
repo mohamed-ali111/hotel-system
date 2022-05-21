@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
@@ -10962,3 +10963,6 @@ a.text-dark:focus {
   }
 }
 
+.hidden{
+  display: none;
+}
