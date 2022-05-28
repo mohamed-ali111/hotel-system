@@ -56,7 +56,7 @@ Auth::routes();
 
 ###############################################################################################
 // for testing 
-Route::get('/Room/{id}','BookingRoomController@getproducts');
+Route::get('/roomType0/{id}','BookingRoomController@getproducts');
 
 // #############################one to many relationship ###################################
 // Route::get('/home','RelationsController@room_types')->name('index.category');

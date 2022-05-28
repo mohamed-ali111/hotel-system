@@ -13,10 +13,12 @@ class Room extends Model
     ];
     
     // Relation ships 
+    // public function roomtype(){
+    //     return $this->belongsTo(RoomType0::Class ,'roomtype_id','id');
+    // }
     public function roomtype(){
-        return $this->belongsTo(RoomType0::Class ,'roomtype_id','id');
+        return $this->belongsTo(RoomType0::Class);
     }
-    
       // Relation ships 
     //   public function booking(){
     //     return $this->belongsTo(BookingRoom::Class ,'room_id','id');

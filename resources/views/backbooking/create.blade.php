@@ -20,7 +20,7 @@
         {{-- ########################### --}}
 
         <form enctype="multipart/form-data" method="post" action="{{ route('booking.save') }}" class="container1"
-            style="margin: auto;margin-bottom: 50px" onchange="myFunction()">
+            style="margin: auto;margin-bottom: 50px" >
             @csrf
 
 
@@ -38,7 +38,7 @@
 
             <div class="form-group">
                 <label>check_out</label>
-                <input type="date" class="form-control" id="check_out" name="check_out" onChange="myFunction()">
+                <input type="date" class="form-control" id="check_out" name="check_out" onChange="javascript:myFunction()">
             </div>
 
 
@@ -67,13 +67,15 @@
 
             <div class="col">
                 <label for="inputName" class="control-label">room_type</label>
-                <select name="room_type" class="form-control SlectBox" onclick="console.log($(this).val())"
-                    onchange="console.log('change is firing')">
+
+                    <select name="room_type" id="room_type" class="form-control SlectBox" >
                     <!--placeholder-->
                     <option value="" selected disabled>حدد القسم</option>
                     @foreach ($roomType0s as $roomType0)
                         <option value="{{ $roomType0->id }}"> {{ $roomType0->room_type_name }}</option>
                         {{-- //there put section->id to get value by id and show value by name of id --}}
+                        {{-- //   <option class="hidden" id value="{{ $roomType0->id }}"> {{ $roomType0->price }}</option> --}}
+
                     @endforeach
                 </select>
             </div>
@@ -81,10 +83,26 @@
 
 
             <div class="col">
-                <label for="inputName" class="control-label">room_id</label>
-                <select id="room_id" name="room_id" class="form-control">
+                <label for="inputName" class="control-label">room</label>
+                <select id="room" name="room_id" class="form-control">
                 </select>
             </div>
+
+
+
+         <div class="col">
+                <label for="inputName" class="control-label">price_room</label>
+                  @foreach ($roomType0s as $roomType0)
+                   <select id="price" name="price" class="form-control" value="{{ $roomType0->id }}">
+                {{ $roomType0->price }}
+                </select>
+                 @endforeach
+            </div>
+
+
+
+
+
 
             {{-- ########################################################################################################### --}}
             <div class="form-group">
@@ -118,8 +136,10 @@
 
 
 
-@endsection
 
+
+
+{{-- <script src="{{ URL::asset('/js/room.js') }}"></script> --}}
 
 
 
@@ -164,31 +184,38 @@
 
 
 
+    <script>
+        $(document).ready(function() {
+           
+            $('select[id="room_type"]').on('change', function() {
+                var SectionId = $(this).val();
+               
+                if (SectionId) {
+                    $.ajax({
+                        url: "{{ URL::to('roomType0') }}/" + SectionId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[id="room"]').empty();
+                            $('select[id="price"]').empty();
 
-<script>
-
-    $(document).ready(function() {
-        $('select[name="room_type"]').on('change', function() {
-            var roomId = $(this).val();
-            if (roomId) {
-                $.ajax({
-                    url: "{{ URL::to('Room') }}/" +
-                        roomId, //Section in this line refere to route Route::get('/Section/{id}','InvoicesController@getproducts');
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                            $('select[name="room_id"]').empty();
                             $.each(data, function(key, value) {
-                                $('select[name="room_id"]').append('<option value="' +
+                                $('select[id="room"]').append('<option value="' +
                                     value + '">' + value + '</option>');
                             });
-                    },
-                });
+                        },
+                    });
 
-            } else {
-                console.log('AJAX load did not work');
-            }
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+
         });
 
-    });
-</script>
+    </script>
+    
+
+
+
+@endsection

@@ -38,6 +38,22 @@
                                 @enderror
                             </div>
                         </div>
+                        {{-- ########################################################################### --}}
+                          <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">role</label>
+
+                            <div class="col-md-6">
+                               admin <input id="role" type="radio" value="admin" class="form-control @error('role') is-invalid @enderror" name="role"  required autocomplete="user">
+                             user   <input id="role" type="radio"  value="user" class="form-control @error('role') is-invalid @enderror" name="role"  required autocomplete="admin">
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- ########################################################################## --}}
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

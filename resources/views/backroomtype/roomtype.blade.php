@@ -118,12 +118,42 @@
 												   @endforeach
                                                     @endif
 									
-												</tbody></table>
+												</tbody>
+                                                </table>
 											</div>
 										</div>
 									</div>
 								</div>
 							
+
+
+ <!-- delete -->
+    <div class="modal" id="modaldemo9">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="#" method="post">
+                    {{ method_field('delete') }}
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                        <input type="text" name="id" id="id" value="">
+                       <input class="form-control" name="room_type_name" id="room_type_name" type="text"  readonly>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
 							</div>
 
 
@@ -157,5 +187,12 @@
     <script src="{{ URL::asset('assets/js/dashboard2.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/echarts/echarts.js') }}"></script>
         <script src="{{ URL::asset('assets/js/othercharts.js') }}"></script>
+
+
+
+          {{-- JAVASCRIPT DELETE --}}
+<script src="{{ URL::asset('/js/room.js') }}"></script>
+
+    {{-- END JAVASCRIPT DELETE --}}
 
 @endsection

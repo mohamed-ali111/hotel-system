@@ -101,9 +101,10 @@ class BookingRoomController extends Controller
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                         //    for testing status 
-                        public function getproducts( $id){
-                            $rooms = DB::table('rooms')->where('roomtype_id',$id)->pluck('room_no','id');//section_id = id =>that is come from rote when you pres on it and pluck product_name with id 
-                            return json_encode($rooms);
-                        }
-                    
+        public function getproducts( $id){
+           // return $id;
+            $rooms = DB::table('rooms')->where("roomtype_id",$id)->pluck("room_no","id");                                  //section_id = id =>that is come from rote when you pres on it and pluck product_name with id 
+            return json_encode($rooms);
+        }
+    
 }
