@@ -74,9 +74,11 @@
                                     <th>Controlles</th>
                                 </tr>
                                    @if($bookings->count()>0)
+                                   <?php $i = 0;?>
                                         @foreach($bookings as $booking)
+                                        <?php $i++;?>
                                         <tr>
-                                            <td>1</td>
+                                            <td>{{$i}}</td>
                                             <td>{{$booking->check_in}}</td>
                                             <td>{{$booking->check_out}}</td>
                                             <td>{{$booking->total_price}}</td>
@@ -111,6 +113,9 @@
 
                             </tbody>
                         </table>
+                             <div class="bg-red text-center">
+                                    {{ $bookings->links() }}
+                                </div>
                     </div>
                 </div>
             </div>

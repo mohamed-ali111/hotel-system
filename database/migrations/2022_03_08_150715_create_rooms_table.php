@@ -21,7 +21,7 @@ class CreateRoomsTable extends Migration
             $table->enum('check_out_status' , ['0','1']);
             $table->enum('delete_status',['0','1'])->default('0');
             $table->unsignedBigInteger('roomtype_id');
-            $table->foreign('roomtype_id')->references('id')->on('room_type0s');
+            $table->foreign('roomtype_id')->references('id')->on('room_type0s')->onDelete('cascade');
             $table->timestamps();
         });
     }

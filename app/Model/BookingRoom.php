@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookingRoom extends Model
 {
     protected $fillable =[
-       'check_in','check_out','total_price','remaining_price','customer_id','room_id','payment_status',
+       'check_in','check_out','total_price','remaining_price','customer_id','payment_status',
     ];
          // Relation ships 
          public function customers(){

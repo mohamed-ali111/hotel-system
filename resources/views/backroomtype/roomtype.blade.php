@@ -108,13 +108,46 @@
                                                 <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                                     data-id="{{ $type->id }}"
                                                     data-room_type_name="{{ $type->room_type_name }}" data-toggle="modal"
-                                                    href="#modaldemo9" title="حذف"><i class="fa fa-trash"></i></a>
+                                                    href="#modaldemo9_{{ $type->id }}" title="حذف"><i class="fa fa-trash"></i></a>
                                             {{-- @endcan --}}
                                         </td>
 
 
 
 													</tr>
+
+
+
+
+
+
+                                                     <!-- delete -->
+    <div class="modal" id="modaldemo9_{{$type->id}}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="{{route('room_type.delete',$type->id)}}" method="post">
+                    {{ method_field('delete') }}
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                        <input type="text" name="id" id="id" value="{{$type->id}}">
+                       <input class="form-control" name="room_type_name" id="room_type_name" value="{{$type->room_type_name}}" type="text"  readonly>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
 												   @endforeach
                                                     @endif
 									
@@ -126,32 +159,6 @@
 								</div>
 							
 
-
- <!-- delete -->
-    <div class="modal" id="modaldemo9">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close"
-                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <form action="#" method="post">
-                    {{ method_field('delete') }}
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                        <input type="text" name="id" id="id" value="">
-                       <input class="form-control" name="room_type_name" id="room_type_name" type="text"  readonly>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
-                    </div>
-            </div>
-            </form>
-        </div>
-    </div>
 
 
 							</div>

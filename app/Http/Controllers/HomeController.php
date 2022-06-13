@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $room_types =DB::table('room_type0s')->select('id','room_type_name','price','max_person')->get();
 
-        $bookings =DB::table('booking_rooms')->select('id','check_in','check_out','total_price','customer_id','room_id','remaining_price','payment_status')->get();
+        $bookings =DB::table('booking_rooms')->select('id','check_in','check_out','total_price','customer_id','remaining_price','payment_status')->get();
         $actors =DB::table('booking_rooms')->where('payment_status','=','1')->get();
 
         $rooms =DB::table('rooms')->select('id','room_no','status','check_in_status','roomtype_id','check_out_status','delete_status') ->get();

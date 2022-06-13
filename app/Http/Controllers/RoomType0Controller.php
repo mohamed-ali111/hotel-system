@@ -49,4 +49,17 @@ public function save(Request $request){
     return redirect()->route('home')->with('info','room type has been updated');
 }
 // #######################################################################################
+
+public function delete(Request $request)
+{
+    // dd($request->id);
+    
+    $id=$request->id;
+    $features = RoomType0::findOrfail($request->id);
+
+
+        $features->delete();
+        return back()->with('info','product has been added to archeve');
+    
+}
 }

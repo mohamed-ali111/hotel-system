@@ -6,13 +6,15 @@ use App\Model\RoomType0;
 use App\Model\Room;
 use App\Model\Customer;
 use Illuminate\Support\Facades\DB;
+use App\user;
+use Illuminate\Support\Facades\Notification;
 
 use Illuminate\Http\Request;
 
 class BookingRoomController extends Controller
 {
     public function index(){
-        $bookings = BookingRoom::all();
+        $bookings = BookingRoom::paginate(3);
         $actors =DB::table('booking_rooms')->where('payment_status','=','1')->get();
         return view('backbooking.index' , compact('bookings','actors'));
     }
@@ -35,7 +37,7 @@ class BookingRoomController extends Controller
     
     public function save(Request $request){
     
-    
+    // return $request;
         $validated = $request->validate([
             'created_at' => 'required|max:255|min:2',
             'check_in' => 'required|max:255|min:1',
@@ -63,6 +65,14 @@ class BookingRoomController extends Controller
             'room_type' => $request->room_type
 
         ]);
+
+
+        $user = User::get(); // to send notification to all users and admin
+        $booking_id= BookingRoom::latest()->first();   //get last booking added
+        Notification::send($user, new \App\Notifications\Add_booking($booking_id));
+
+
+   
         return redirect()->route('home')->with('info','room type has been updated');
     }
     // #######################################################################################
@@ -103,8 +113,73 @@ class BookingRoomController extends Controller
                         //    for testing status 
         public function getproducts( $id){
            // return $id;
-            $rooms = DB::table('rooms')->where("roomtype_id",$id)->pluck("room_no","id");                                  //section_id = id =>that is come from rote when you pres on it and pluck product_name with id 
+            $rooms = DB::table('rooms')->where("roomtype_id",$id)->pluck('room_no','id');                                  //section_id = id =>that is come from rote when you pres on it and pluck product_name with id 
             return json_encode($rooms);
         }
+
+
+
+        // mark as read all 
     
+        public function MarkAsRead_all (Request $request)
+        {
+    
+            $userUnreadNotification= auth()->user()->unreadNotifications;
+    
+            if($userUnreadNotification) {
+                $userUnreadNotification->markAsRead();
+                return back();
+            }
+    
+    
+        }
+
+
+
+        
+
+        // mark as read all 
+
+
+//         public function destroy($userID)
+// {
+//     $user = User::findOrFail($userID);
+//     $user->unreadNotifications->get()->map(function($n) {
+//         $n->markAsRead();
+//     });
+
+//     return back();
+// }
+    
+        public function markNotification (Request $request)
+        {
+            // $userUnreadNotification= auth()->user()->unreadNotifications;
+            // $bookings = BookingRoom::all();
+
+            // $userUnreadNotification->readNotifications->update(['read_at' => Carbon::now()]);
+
+            $notification_for_user = auth()->user()->unreadNotifications()->first()->update(['read_at' => now()]);
+
+            // return  view('backbooking.index') ;
+return back();
+    
+        }
+//        public function readNotification(Request $request) {
+//            return $request;
+//         // $user = App\User::find('id');
+
+//         // $user->unreadNotifications()->update(['read_at' => Carbon::now()]);
+//         // return back();
+// }
+
+
+// public function markNotification(Request $request)
+// {
+//     auth()->user()->unreadNotifications->when($request->input('id'), function ($query) use ($request) {
+//             return $query->where('id', $request->input('id'));
+//         })
+//         ->markAsRead();
+
+//     return response()->noContent();
+// }
 }

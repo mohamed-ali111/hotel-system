@@ -84,20 +84,20 @@
 
             <div class="col">
                 <label for="inputName" class="control-label">room</label>
-                <select id="room" name="room_id" class="form-control">
+                <select id="room_id" name="room_id" class="form-control">
                 </select>
             </div>
 
 
 
-         <div class="col">
+         {{-- <div class="col">
                 <label for="inputName" class="control-label">price_room</label>
                   @foreach ($roomType0s as $roomType0)
                    <select id="price" name="price" class="form-control" value="{{ $roomType0->id }}">
                 {{ $roomType0->price }}
                 </select>
                  @endforeach
-            </div>
+            </div> --}}
 
 
 
@@ -196,11 +196,11 @@
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
-                            $('select[id="room"]').empty();
+                            $('select[id="room_id"]').empty();
                             $('select[id="price"]').empty();
 
                             $.each(data, function(key, value) {
-                                $('select[id="room"]').append('<option value="' +
+                                $('select[id="room_id"]').append('<option value="' +
                                     value + '">' + value + '</option>');
                             });
                         },

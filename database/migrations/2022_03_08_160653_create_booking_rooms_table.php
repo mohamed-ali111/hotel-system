@@ -26,8 +26,7 @@ class CreateBookingRoomsTable extends Migration
             $table->foreign('customer_id')->references('id')->on('customers');
             ####################################################
 
-            $table->unsignedBigInteger('room_id');
-            $table->foreign('room_id')->references('id')->on('rooms');
+       
             ####################################################
             $table->timestamps();
             // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

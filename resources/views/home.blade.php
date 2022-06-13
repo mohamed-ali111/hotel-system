@@ -2,7 +2,7 @@
 
 @extends('layouts.master')
 @section('title')
-    الافسام
+    الرئيسيه
 @stop
 @section('css')
     <!-- Internal Data table css -->

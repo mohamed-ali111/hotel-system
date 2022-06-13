@@ -21,7 +21,7 @@ Auth::routes();
 
 // Route::resource('room_type','RoomType0Controller');
 
-// Route::get('/backbooking/show','RoomType0Controller@index')->name('booking.show');
+Route::delete('/room_type/delete','RoomType0Controller@delete')->name('room_type.delete');
 
         Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
      #################################################################################
@@ -57,6 +57,13 @@ Auth::routes();
 ###############################################################################################
 // for testing 
 Route::get('/roomType0/{id}','BookingRoomController@getproducts');
+
+
+Route::get('MarkAsRead_all','BookingRoomController@MarkAsRead_all')->name('MarkAsRead_all');
+// for testing 
+// Route::get('readNotification', 'BookingRoomController@readNotification')->name('readNotification');
+
+Route::get('/mark-as-read', 'BookingRoomController@markNotification')->name('markNotification');
 
 // #############################one to many relationship ###################################
 // Route::get('/home','RelationsController@room_types')->name('index.category');

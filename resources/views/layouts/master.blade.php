@@ -36,6 +36,7 @@
 	</body>
 </html>
 
+{{-- //dont forget this refer to make refresh for page to make notification appear without refresh    --}}
 <script>
     setInterval(function() {
         $("#notifications_count").load(window.location.href + " #notifications_count");
